@@ -9,53 +9,47 @@
 <body>
 
 <header>
-    <h1>Resultado da Avaliação LGPD</h1>
+    <div class="badge">Guia interativo</div>
+    <h1>Resultado da Avaliação</h1>
     <p>Relatório de adequação do sistema corporativo à Lei Geral de Proteção de Dados</p>
 </header>
 
 <main>
 
-    <div class="resultado">
-        <h2>Grau de Adequação à LGPD</h2>
+    <div class="resultado-header">
+        <h2>Relatório de Adequação à LGPD</h2>
+        <span class="nivel-badge" id="nivelBadge">Calculando...</span>
+    </div>
 
-        <p>
-            <strong>Resultado obtido:</strong>
-            <span id="percentual">0</span>%
-        </p>
+    <div class="resultado-body">
 
-        <p>
-            <strong>Nível de maturidade:</strong>
-            <span id="nivel">-</span>
-        </p>
-
-        <div class="barra-externa">
-            <div class="barra-interna" id="barraResultado"></div>
+        <div class="score-row">
+            <div class="score-circle">
+                <span class="score-num" id="percentual">0</span>
+                <span class="score-pct">%</span>
+            </div>
+            <div style="flex: 1;">
+                <p class="barra-label">Grau de adequação geral</p>
+                <div class="barra-resultado-ext">
+                    <div class="barra-resultado-int" id="barraResultado"></div>
+                </div>
+            </div>
         </div>
+
+        <div class="resultado-card">
+            <h2>Interpretação e Recomendações</h2>
+            <div id="interpretacao"></div>
+        </div>
+
+        <button class="btn-secondary" onclick="window.location.href='index.html'" style="margin-top: 24px;">← Voltar ao início</button>
+
     </div>
-
-    <div class="resultado">
-        <h2>Interpretação</h2>
-        <p id="interpretacao"></p>
-    </div>
-
-    <div class="resultado">
-        <h2>Principais Recomendações</h2>
-        <ul>
-            <li>Formalizar políticas internas de proteção de dados.</li>
-            <li>Realizar mapeamento completo dos dados pessoais tratados.</li>
-            <li>Implementar controles de acesso e rastreabilidade.</li>
-            <li>Promover treinamentos periódicos sobre LGPD.</li>
-            <li>Revisar continuamente processos e controles.</li>
-        </ul>
-    </div><br>
-
-    <button onclick="window.location.href='index.html'">Voltar ao início</button>
 
 </main>
 
-<footer>
-    <p>Protótipo acadêmico — TCC Engenharia de Software</p>
-</footer>
+    <footer>
+      <p>Orientado por Rafael de Sá Mascarenhas — Desenvolvido por Lucas Miguel de Melo Salles</p>
+    </footer>
 
 <script src="js/resultado.js"></script>
 </body>

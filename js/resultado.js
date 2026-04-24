@@ -1,42 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const percentual = Number(localStorage.getItem("percentual"));
-    if (!percentual && percentual !== 0) return;
+    const percentualRaw = localStorage.getItem("percentual");
+    const nivel = localStorage.getItem("nivel");
+    const interpretacao = localStorage.getItem("interpretacao");
 
-    let nivel = "";
-    let interpretacao = "";
-
-    if (percentual <= 25) {
-        nivel = "Crítico";
-        interpretacao = "A organização apresenta nível crítico de maturidade em LGPD, com ausência ou fragilidade significativa de controles, governança e práticas de proteção de dados.";
-
-    } else if (percentual <= 50) {
-        nivel = "Inicial";
-        interpretacao = "A organização encontra-se em estágio inicial de adequação à LGPD, com ações pontuais e pouco estruturadas.";
-
-    } else if (percentual <= 75) {
-        nivel = "Intermediário";
-        interpretacao = "A organização apresenta nível intermediário de maturidade em LGPD, com processos parcialmente definidos e controles em evolução.";
-
-    } else {
-        nivel = "Avançado";
-        interpretacao = "A organização apresenta elevado nível de maturidade em LGPD, com governança estruturada e práticas consolidadas.";
+    if (percentualRaw === null || nivel === null || interpretacao === null) {
+        window.location.href = "index.html";
+        return;
     }
 
-    document.getElementById("percentual").textContent = percentual;
-    document.getElementById("nivel").textContent = nivel;
-    document.getElementById("interpretacao").textContent = interpretacao;
+    const percentual = Number(percentualRaw);
 
+    // Preenche pontuação e nível
+    document.getElementById("percentual").textContent = percentual;
+    document.getElementById("nivelBadge").textContent = "Nível: " + nivel;
+
+    // Renderiza interpretação em parágrafos
+    const interpretacaoEl = document.getElementById("interpretacao");
+    interpretacaoEl.innerHTML = "";
+    interpretacao.split("\n\n").forEach(paragrafo => {
+        if (paragrafo.trim()) {
+            const p = document.createElement("p");
+            p.textContent = paragrafo.trim();
+            interpretacaoEl.appendChild(p);
+        }
+    });
+
+    // Barra de resultado com cor por nível
     const barra = document.getElementById("barraResultado");
     barra.style.width = percentual + "%";
 
-    if (percentual <= 25) {
+    if (percentual <= 39) {
         barra.style.backgroundColor = "#e74c3c";
-    } else if (percentual <= 50) {
+        document.getElementById("nivelBadge").style.background = "#fadbd8";
+        document.getElementById("nivelBadge").style.color = "#922b21";
+    } else if (percentual <= 59) {
         barra.style.backgroundColor = "#e67e22";
-    } else if (percentual <= 75) {
+        document.getElementById("nivelBadge").style.background = "#fdebd0";
+        document.getElementById("nivelBadge").style.color = "#935116";
+    } else if (percentual <= 79) {
         barra.style.backgroundColor = "#f1c40f";
+        document.getElementById("nivelBadge").style.background = "#fef9e7";
+        document.getElementById("nivelBadge").style.color = "#7d6608";
     } else {
-        barra.style.backgroundColor = "#2ecc71";
+        barra.style.backgroundColor = "#27ae60";
+        document.getElementById("nivelBadge").style.background = "#d5f5e3";
+        document.getElementById("nivelBadge").style.color = "#1e8449";
     }
 });
